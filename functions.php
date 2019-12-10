@@ -120,10 +120,13 @@ add_action( 'widgets_init', 'pawprint_jot_widgets_init' );
  * Enqueue scripts and styles.
  */
 function pawprint_jot_scripts() {
+	wp_enqueue_style( 'pawprint-jot-bootstrap', get_template_directory_uri() . '/css/bootstrap.min.css', array(), '4.4.1', 'all' );
+	wp_enqueue_style( 'pawprint-jot-fontawesome', get_template_directory_uri() . '/css/all.min.css', array(), '5.11.2', 'all' );
 	wp_enqueue_style( 'pawprint-jot-style', get_stylesheet_uri() );
 
-	wp_enqueue_script( 'pawprint-jot-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
-
+	// wp_enqueue_script( 'pawprint-jot-navigation', get_template_directory_uri() . '/js/navigation.js', array(), '20151215', true );
+	wp_enqueue_script( 'pawprint-jot-bootstrapjs', get_template_directory_uri() . '/js/bootstrap.min.js', array('jquery'), '4.4.1', true );
+	wp_enqueue_script( 'pawprint-jot-fontawesomejs', get_template_directory_uri() . '/js/fontawesome.min.js', array('jquery'), '5.11.2', true );
 	wp_enqueue_script( 'pawprint-jot-skip-link-focus-fix', get_template_directory_uri() . '/js/skip-link-focus-fix.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
@@ -165,3 +168,8 @@ if ( defined( 'JETPACK__VERSION' ) ) {
 if ( class_exists( 'WooCommerce' ) ) {
 	require get_template_directory() . '/inc/woocommerce.php';
 }
+
+/**
+ * Load Bootstrap Menu.
+ */
+require get_template_directory() . '/inc/bootstrap-walker.php';
