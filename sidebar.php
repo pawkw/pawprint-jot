@@ -7,11 +7,13 @@
  * @package PawPrint_Jot
  */
 
-if ( ! is_active_sidebar( 'sidebar-1' ) ) {
-	return;
-}
+if ( is_active_sidebar( 'sidebar-1' ) ) {
 ?>
 
-<aside id="secondary" class="widget-area">
+<aside id="secondary" class="widget-area col-md-3">
 	<?php dynamic_sidebar( 'sidebar-1' ); ?>
 </aside><!-- #secondary -->
+
+<?php } ?>
+</div> <!-- row from index.php, etc. -->
+</div> <!-- container from index.php, etc. -->

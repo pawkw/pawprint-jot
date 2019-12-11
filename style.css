@@ -22,6 +22,7 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 /*--------------------------------------------------------------
 >>> TABLE OF CONTENTS:
 ----------------------------------------------------------------
+# Break words
 # Navigation
 	## Links
 	## Menus
@@ -35,6 +36,29 @@ Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
 	## Captions
 	## Galleries
 --------------------------------------------------------------*/
+
+/*--------------------------------------------------------------
+# Break words
+--------------------------------------------------------------*/
+#primary, #secondary {
+
+	/* These are technically the same, but use both */
+	overflow-wrap: break-word;
+	word-wrap: break-word;
+  
+	-ms-word-break: break-all;
+	/* This is the dangerous one in WebKit, as it breaks things wherever */
+	word-break: break-all;
+	/* Instead use this non-standard one: */
+	word-break: break-word;
+  
+	/* Adds a hyphen where the word breaks, if supported (No Blink) */
+	-ms-hyphens: auto;
+	-moz-hyphens: auto;
+	-webkit-hyphens: auto;
+	hyphens: auto;
+  
+  }
 
 /*--------------------------------------------------------------
 # Navigation
@@ -187,6 +211,11 @@ a:hover, a:active {
 
 .widget select {
 	max-width: 100%;
+}
+
+.widget ul {
+	list-style: none;
+	padding-left: 1rem;
 }
 
 /*--------------------------------------------------------------

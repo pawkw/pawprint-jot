@@ -108,10 +108,10 @@ function pawprint_jot_widgets_init() {
 		'name'          => esc_html__( 'Sidebar', 'pawprint-jot' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'pawprint-jot' ),
-		'before_widget' => '<section id="%1$s" class="widget %2$s">',
-		'after_widget'  => '</section>',
-		'before_title'  => '<h2 class="widget-title">',
-		'after_title'   => '</h2>',
+		'before_widget' => '<section id="%1$s" class="widget card bg-light %2$s">',
+		'after_widget'  => '</div></section>',
+		'before_title'  => '<div class="widget-title card-header">',
+		'after_title'   => '</div><div class="card-body">',
 	) );
 }
 add_action( 'widgets_init', 'pawprint_jot_widgets_init' );
@@ -170,6 +170,9 @@ if ( class_exists( 'WooCommerce' ) ) {
 }
 
 /**
- * Load Bootstrap Menu.
+ * Register Custom Navigation Walker
  */
-require get_template_directory() . '/inc/bootstrap-walker.php';
+function register_navwalker(){
+	require_once get_template_directory() . '/inc/class-wp-bootstrap-navwalker.php';
+}
+add_action( 'after_setup_theme', 'register_navwalker' );
