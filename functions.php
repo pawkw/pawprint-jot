@@ -108,10 +108,10 @@ function pawprint_jot_widgets_init() {
 		'name'          => esc_html__( 'Sidebar', 'pawprint-jot' ),
 		'id'            => 'sidebar-1',
 		'description'   => esc_html__( 'Add widgets here.', 'pawprint-jot' ),
-		'before_widget' => '<section id="%1$s" class="widget card bg-light %2$s">',
-		'after_widget'  => '</div></section>',
-		'before_title'  => '<div class="widget-title card-header">',
-		'after_title'   => '</div><div class="card-body">',
+		'before_widget' => '<section id="%1$s" class="widget p-2 card bg-light %2$s">',
+		'after_widget'  => '</section>',
+		'before_title'  => '<h4 class="widget-title border-bottom p-2 card-title">',
+		'after_title'   => '</h4>',
 	) );
 }
 add_action( 'widgets_init', 'pawprint_jot_widgets_init' );
