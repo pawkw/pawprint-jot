@@ -163,6 +163,8 @@ a:hover, a:active {
 	overflow: hidden;
 }
 
+*/
+
 .comment-navigation .nav-previous,
 .posts-navigation .nav-previous,
 .post-navigation .nav-previous {
@@ -176,7 +178,7 @@ a:hover, a:active {
 	float: right;
 	text-align: right;
 	width: 50%;
-} */
+}
 
 
 /*--------------------------------------------------------------

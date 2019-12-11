@@ -39,7 +39,7 @@ get_header();
 
 			endwhile;
 
-			the_posts_navigation();
+			pawprint_jot_posts_navigation();
 
 		else :
 

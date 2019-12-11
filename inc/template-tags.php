@@ -7,6 +7,100 @@
  * @package PawPrint_Jot
  */
 
+if ( ! function_exists( 'pawprint_jot_posts_navigation' ) ) {
+	function pawprint_jot_post_navigation( $args = array() ) {
+		// Make sure the nav element has an aria-label attribute: fallback to the screen reader text.
+		if ( ! empty( $args['screen_reader_text'] ) && empty( $args['aria_label'] ) ) {
+			$args['aria_label'] = $args['screen_reader_text'];
+		}
+	
+		$args = wp_parse_args(
+			$args,
+			array(
+				'prev_text'          => '<i class="fas fa-angle-left"></i> %title',
+				'next_text'          => '%title <i class="fas fa-angle-right"></i>',
+				'in_same_term'       => false,
+				'excluded_terms'     => '',
+				'taxonomy'           => 'category',
+				'screen_reader_text' => __( 'Post navigation' ),
+				'aria_label'         => __( 'Posts' ),
+			)
+		);
+	
+		$previous = get_previous_post_link(
+			'<div class="nav-previous">%link</div>',
+			$args['prev_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+	
+		$next = get_next_post_link(
+			'<div class="nav-next">%link</div>',
+			$args['next_text'],
+			$args['in_same_term'],
+			$args['excluded_terms'],
+			$args['taxonomy']
+		);
+	
+		// Only add markup if there's somewhere to navigate to.
+		if ( $previous || $next ) {
+			$navigation = _navigation_markup( $previous . $next, 'post-navigation', $args['screen_reader_text'], $args['aria_label'] );
+			?>
+			<nav class="navigation post-navigation" role="navigation" aria-label="Posts">
+				<h2 class="sr-only sr-only-focusable">Post navigation</h2>
+				<div class="nav-links">
+					<?php echo $previous; ?>
+					<?php echo $next; ?>
+				</div>
+			</nav>
+			<?php
+		}
+	}
+}
+
+if ( ! function_exists( 'pawprint_jot_posts_navigation' ) ) {
+	function pawprint_jot_posts_navigation( $args = array() ) {
+	 
+		// Don't print empty markup if there's only one page.
+		if ( $GLOBALS['wp_query']->max_num_pages > 1 ) {
+			// Make sure the nav element has an aria-label attribute: fallback to the screen reader text.
+			if ( ! empty( $args['screen_reader_text'] ) && empty( $args['aria_label'] ) ) {
+				$args['aria_label'] = $args['screen_reader_text'];
+			}
+	 
+			$args = wp_parse_args(
+				$args,
+				array(
+					'prev_text'          => __( '<i class="fas fa-angle-left"></i> Older posts' ),
+					'next_text'          => __( 'Newer posts <i class="fas fa-angle-right"></i>' ),
+					'screen_reader_text' => __( 'Posts navigation' ),
+					'aria_label'         => __( 'Posts' ),
+				)
+			);
+	 
+			$next_link = get_previous_posts_link( $args['next_text'] );
+			$prev_link = get_next_posts_link( $args['prev_text'] );
+	 
+			if ( $prev_link ) {
+				$navigation .= '<div class="nav-previous">' . $prev_link . '</div>';
+			}
+	 
+			if ( $next_link ) {
+				$navigation .= '<div class="nav-next">' . $next_link . '</div>';
+			}
+			?>
+			<nav class="navigation posts-navigation" role="navigation" aria-label="Posts">
+				<h2 class="sr-only sr-only-focusable"><?php __('Posts navigation', 'pawprint-jot') ?></h2>
+				<div class="nav-links"><?php echo $navigation ?></div>
+			</nav>
+
+			<?php
+		}
+	}
+	
+}
+
 if ( ! function_exists( 'pawprint_jot_posted_on' ) ) :
 	/**
 	 * Prints HTML with meta information for the current post-date/time.
